@@ -1,0 +1,7 @@
+error
+Min i = 0
+Min j = 3
+Min i = 3
+Min j = -3
+Min i = 0
+Min j = 1
