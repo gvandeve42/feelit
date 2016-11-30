@@ -1,9 +1,0 @@
-Min i = 1
-Min j = 0
-Piece trouvee
-Coor || i[0] = 0 || j[0] = 0 ||
-Coor || i[1] = 0 || j[1] = 2 ||
-Coor || i[2] = 1 || j[2] = 1 ||
-Coor || i[3] = 1 || j[3] = 2 ||
-Char || elem->symb = A ||
-
