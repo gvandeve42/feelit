@@ -1,1 +1,2 @@
-/logs/user
+/logs/user/valid/*.txt
+/logs/user/invalid/*.txt

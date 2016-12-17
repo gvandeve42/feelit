@@ -13,10 +13,9 @@
 #!/bin/bash
 
 PATHF=~/work/fillit
+IS_GOOD=FALSE
 
 clear
-
-gcc -o f_strerror ./strerror/strerror.c
 
 echo "\033[44;1m============================================================================================="
 echo "======================================== TEST FILLIT ========================================"
@@ -47,8 +46,25 @@ for file in $(ls test_v/ | sort)
 do
 	echo
 	echo "\033[44;1m---------- run on test_v/$file\033[0m"
-	$PATHF/fillit test_v/$file > ./logs/user/valid/user_$file.txt && \
-		echo "\033[32;1m\o/ PAS D'ERREUR, EN ATTENTE DE LA DIFF \o/\n[RESULTAT ENREGISTRE DANS ./logs/user/valid/user_$file.txt]\033[0m" && \
-		cat ./logs/user/valid/user_$file.txt || \
-		echo "\033[31;1m/!\\ [ERREUR, FIN DU PROGRAMME] /!\\"
+	$PATHF/fillit ./test_v/$file >  ./logs/user/valid/user_$file.txt && \
+	    echo "\033[32;1m\o/ PAS D'ERREUR, EN ATTENTE DE LA DIFF \o/\n[RESULTAT ENREGISTRE DANS ./logs/user/valid/user_$file.txt]\033[0m" && \
+	    cat ./logs/user/valid/user_$file.txt || \
+		echo "\033[31;1m/!\\ [ERREUR, FIN DU PROGRAMME] /!\\" \
+        echo
+        echo $IS_GOOD
+        echo
+        diff ./logs/user/valid/user_$file.txt ./logs/results/result_$file > ./logs/results/diff_$file
+        RESULT="$(cat ./logs/results/diff_$file)"
+        if [ -z $RESULT ]
+        then
+            echo "\033[32;1m[ \o/ DIFF OK \o/ ]\033[0m";
+            echo
+        else
+            echo "\033[31;1m/!\\ [ DIFF INVALIDE ] /!\\";
+            echo
+            cat ./logs/results/diff_$file;
+            echo "\033[0m"
+        fi
 done
+
+make -C $PATHF fclean;
