@@ -51,8 +51,6 @@ do
 	    cat ./logs/user/valid/user_$file.txt || \
 		echo "\033[31;1m/!\\ [ERREUR, FIN DU PROGRAMME] /!\\" \
         echo
-        echo $IS_GOOD
-        echo
         diff ./logs/user/valid/user_$file.txt ./logs/results/result_$file > ./logs/results/diff_$file
         RESULT="$(cat ./logs/results/diff_$file)"
         if [ -z $RESULT ]
